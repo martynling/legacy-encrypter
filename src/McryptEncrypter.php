@@ -66,11 +66,10 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
      * Encrypt the given value.
      *
      * @param  string  $value
+     * @param  bool  $serialize
      * @return string
-     *
-     * @throws \Illuminate\Contracts\Encryption\EncryptException
      */
-    public function encrypt($value)
+    public function encrypt($value, $serialize = true)
     {
         $iv = mcrypt_create_iv($this->getIvSize(), $this->getRandomizer());
 
@@ -108,9 +107,10 @@ class McryptEncrypter extends BaseEncrypter implements EncrypterContract
      * Decrypt the given value.
      *
      * @param  string  $payload
+     * @param  bool  $unserialize
      * @return string
      */
-    public function decrypt($payload)
+    public function decrypt($payload, $unserialize = true)
     {
         $payload = $this->getJsonPayload($payload);
 
